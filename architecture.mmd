@@ -1,0 +1,53 @@
+``` mermaid
+graph TD
+    subgraph "Frontend (Web/Mobile App)"
+        UI[User Interface]
+        WebRTC[WebRTC Video/Audio]
+        Dashboard[Analytics Dashboard]
+    end
+    
+    subgraph "Backend Services"
+        API[API Gateway]
+        Auth[Authentication Service]
+        VideoProc[Video Processing Service]
+        AudioProc[Audio Processing Service]
+        QGen[Question Generation Service]
+        Analytics[Analytics Service]
+        DB[(Database)]
+    end
+    
+    subgraph "ML Models"
+        MediaPipe[MediaPipe - Body Language]
+        Whisper[OpenAI Whisper - Speech-to-Text]
+        LLAMA[LLAMA - Question Generation]
+        YOLOv8[YOLOv8 - Real-time Detection]
+        SpeechAnalysis[Speech Analysis]
+    end
+
+    %% Frontend connections
+    UI <--> API
+    WebRTC <--> VideoProc
+    WebRTC <--> AudioProc
+    Dashboard <--> Analytics
+    
+    %% Backend service connections
+    API <--> Auth
+    API <--> VideoProc
+    API <--> AudioProc
+    API <--> QGen
+    API <--> Analytics
+    VideoProc <--> DB
+    AudioProc <--> DB
+    QGen <--> DB
+    Analytics <--> DB
+    
+    %% ML model connections
+    VideoProc <--> MediaPipe
+    VideoProc <--> YOLOv8
+    AudioProc <--> Whisper
+    AudioProc <--> SpeechAnalysis
+    QGen <--> LLAMA
+    
+    %% User flows
+    User((User)) <--> UI
+```
